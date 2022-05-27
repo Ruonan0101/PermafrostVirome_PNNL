@@ -231,10 +231,6 @@ info_CW <- read.csv("CellWallHydrolase_newick_info.csv")
 colnames(info_CW)<-c("id","taxa",'type')
 tree_CW<-read.tree('CellWallHydrolase_newick.txt')
 ##################
-info_ubiq <- read.csv("Ubiquitin_tree_info_final.csv")
-colnames(info_ubiq)<-c("id","taxa",'type')
-tree_ubiq<-read.tree('Ubiquinin_ref_verified_cdhit70_UbiquininFamily_exp_cdhit90_aligned_tree.txt')
-##################
 alltaxa<-union(info_PG$taxa,union(info_CW$taxa,info_ubiq$taxa))
 length(alltaxa)
 #Iwanthue; get color combo
@@ -274,13 +270,4 @@ fig4_CellWallHydrolase<-ggtree(tree_CW) %<+% info_CW +
   scale_color_manual(values = alltaxa.col)+
   guides(color=guide_legend(ncol=1))
 
-
-fig4_ubiquitin<-ggtree(tree_ubiq) %<+% info_ubiq + 
-  geom_tippoint(aes(color=taxa),size=2)+ 
-  theme(legend.position="right", legend.text = element_text(size=8), legend.key.size = unit(0.5, "cm"))+
-  guides(color = guide_legend(override.aes = list(size = 3)))+
-  scale_color_manual(values = alltaxa.col)+
-  guides(color=guide_legend(ncol=1))
-
-
-grid.arrange(fig4_PG, fig4_CellWallHydrolase, fig4_ubiquitin, ncol=3)
+grid.arrange(fig4_PG, fig4_CellWallHydrolase, ncol=2)
